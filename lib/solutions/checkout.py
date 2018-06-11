@@ -4,6 +4,8 @@ from collections import namedtuple
 PriceOffer = namedtuple('PriceOffer', ('quantity', 'price'))
 ProductOffer = namedtuple('ProductOffer', ('quantity', 'product'))
 
+
+
 PRODUCT_TABLE = {
     'A': {
         'price': 50,
@@ -78,7 +80,7 @@ def checkout(skus):
             return -1
         products[sku] += 1
 
-    # Remove discounted products
+    # Remove discounted products (the related quantity)
     for sku, qty in products.items():
         disc_products = get_product_discounts(sku, qty)
         for disc_sku, qty in disc_products.items():
