@@ -13,7 +13,8 @@ from lib.solutions.checkout import checkout
         ('AAAAAAAAACD', 415),
         ('BBE', 85),
         ('BBEE', 110),
-        ('BFF', 50)
+        ('BFF', 50),
+        ('FBFF', 50)
 ))
 def test_checkout_success(skus, result):
     assert checkout(skus) == result
