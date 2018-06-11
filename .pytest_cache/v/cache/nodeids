@@ -1,0 +1,5 @@
+[
+  "test/solutions/test_sum.py::test_sum_success[0-0-0]", 
+  "test/solutions/test_sum.py::test_sum_success[0-1-1]", 
+  "test/solutions/test_sum.py::test_sum_success[1-2-3]"
+]

@@ -3,10 +3,10 @@ import pytest
 from lib.solutions.sum import sum
 
 
-class TestSum(unittest.TestCase):
-    def test_sum(self):
-        self.assertEqual(sum(1, 2), 3)
-
-
-if __name__ == '__main__':
-    unittest.main()
+@pytest.mark.parametrize(('x', 'y', 'result'), (
+        (0, 0, 0),
+        (0, 1, 1),
+        (1, 2, 3)
+))
+def test_sum_success(x, y, result):
+    assert sum(x, y) == result
