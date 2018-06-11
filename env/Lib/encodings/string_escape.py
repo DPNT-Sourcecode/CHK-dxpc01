@@ -2,7 +2,7 @@
 """ Python 'escape' Codec
 
 
-Written by Martin v. LÃ¶wis (martin@v.loewis.de).
+Written by Martin v. Löwis (martin@v.loewis.de).
 
 """
 import codecs
