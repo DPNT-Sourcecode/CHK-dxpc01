@@ -10,3 +10,13 @@ from lib.solutions.sum import sum
 ))
 def test_sum_success(x, y, result):
     assert sum(x, y) == result
+
+
+@pytest.mark.parametrize(('x', 'y'), (
+        (0, 'a'),
+        ('b', True),
+        (object(), 2)
+))
+def test_sum_invalid_arguments(x, y):
+    with pytest.raises(ValueError):
+        assert sum(x, y)
