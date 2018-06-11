@@ -14,5 +14,7 @@
   "test/solutions/test_checkout.py::test_checkout_success[AAAAACD-264]": true, 
   "test/solutions/test_checkout.py::test_checkout_success[AAAAACD-265]": true, 
   "test/solutions/test_checkout.py::test_checkout_success[BBE-40]": true, 
-  "test/solutions/test_checkout.py::test_checkout_success[BBEE-85]": true
+  "test/solutions/test_checkout.py::test_checkout_success[BBEE-85]": true, 
+  "test/solutions/test_checkout.py::test_checkout_success[SSS-50]": true, 
+  "test/solutions/test_checkout.py::test_checkout_success[SSYY-65]": true
 }

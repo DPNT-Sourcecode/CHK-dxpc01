@@ -4,7 +4,7 @@ from collections import namedtuple
 PriceOffer = namedtuple('PriceOffer', ('quantity', 'price'))
 ProductOffer = namedtuple('ProductOffer', ('quantity', 'product'))
 SpecialOffer = namedtuple('SpecialOffer', ('group_id',))
-GroupDiscount = namedtuple('GroupDiscount', ('group', 'quantity', 'price'))
+GroupDiscount = namedtuple('GroupDiscount', ('skus', 'quantity', 'price'))
 
 PRODUCT_TABLE = {
     'A': {'price': 50, 'offer': [PriceOffer(5, 200), PriceOffer(3, 130)]},
@@ -72,6 +72,40 @@ def get_price(sku, quantity):
     return offer_price + quantity * product['price']
 
 
+def process_group_discounts_price(products):
+    groups = defaultdict(int)
+    group_skus = defaultdict(list)
+
+    # Aggregate all products that are part pf a specific group offer
+    for sku, qty in products.items():
+        product = get_product(sku)
+        if 'offer' not in product:
+            continue
+
+        for offer in product['offer']:
+            if not isinstance(offer, SpecialOffer):
+                continue
+            group = GROUP_DISCOUNTS[offer.group_id]
+            if sku in group.skus:
+                groups[offer.group_id] += qty
+                group_skus[offer.group_id].append(sku)
+
+    # Apply the group discounts to all products
+    special_price = 0
+    for group_id, group_qty in groups.items():
+        group = GROUP_DISCOUNTS[group_id]
+        discounted_count = (group_qty // group.quantity) * group.quantity
+        special_price += (group_qty // group.quantity) * group.price
+
+        while discounted_count > 0:
+            for sku in group_skus[group_id]:
+                discounted = min(discounted_count, products[sku])
+                discounted_count -= discounted
+                products[sku] -= discounted
+
+    return special_price
+
+
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
@@ -84,26 +118,7 @@ def checkout(skus):
             return -1
         products[sku] += 1
 
-    # Process group discounts
-    special_offer_price = 0
-    discount_count = 0
-    for sku, qty in products.items():
-        product = get_product(sku)
-        if 'offer' in product:
-
-            for offer in product['offer']:
-                if not isinstance(offer, SpecialOffer):
-                    continue
-
-                group_discount = GROUP_DISCOUNTS[offer.group_id]
-                if sku in group_discount.group:
-                    discount_count += qty
-                    discounted_qty = discount_count // group_discount.quantity
-
-                    if discounted_qty > 0:
-                        special_offer_price += \
-                            discounted_qty * group_discount.price
-                        products[sku] -=
+    total = process_group_discounts_price(products)
 
     # Remove discounted products (the related quantity)
     for sku, qty in products.items():
@@ -112,7 +127,6 @@ def checkout(skus):
             products[disc_sku] -= qty
 
     # Calculate basket
-    total = 0
     for sku, qty in products.items():
         if qty > 0:
             total += get_price(sku, qty)
