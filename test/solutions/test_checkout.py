@@ -3,6 +3,8 @@ from lib.solutions.checkout import checkout
 
 
 @pytest.mark.parametrize(('skus', 'result'), (
+        ('', 0),
+        ('A', 50),
         ('AA', 100),
         ('AAA', 130),
         ('D', 15),
