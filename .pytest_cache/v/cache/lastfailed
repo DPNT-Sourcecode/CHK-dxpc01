@@ -21,7 +21,5 @@
   "test/solutions/test_checkout.py::test_checkout_success[SSYY-65]": true, 
   "test/solutions/test_checkout.py::test_checkout_success[SSYYTS-90]": true, 
   "test/solutions/test_checkout.py::test_checkout_success[STXS-21]": true, 
-  "test/solutions/test_checkout.py::test_checkout_success[STXS-62]": true, 
-  "test/solutions/test_checkout.py::test_checkout_success[Z-21]": true, 
   "test/solutions/test_checkout.py::test_checkout_success[ZZZS-65]": true
 }
