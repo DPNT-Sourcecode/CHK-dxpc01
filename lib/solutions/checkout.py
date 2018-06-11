@@ -32,7 +32,7 @@ PRODUCT_TABLE = {
     'W': {'price': 20},
     'X': {'price': 17, 'offer': [SpecialOffer(1)]},
     'Y': {'price': 20, 'offer': [SpecialOffer(1)]},
-    'Z': {'price': 21, 'offer': [SpecialOffer(1)]},
+    'Z': {'price': 20, 'offer': [SpecialOffer(1)]},
 }
 
 GROUP_DISCOUNTS = {
