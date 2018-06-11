@@ -1,0 +1,4 @@
+{
+  "test/solutions/test_checkout.py::test_checkout_success[AA-100]": true, 
+  "test/solutions/test_checkout.py::test_checkout_success[AAA-130]": true
+}
