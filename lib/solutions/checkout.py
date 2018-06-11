@@ -50,3 +50,4 @@ def checkout(skus):
     total = 0
     for sku, qty in products.items():
         total += get_price(sku, qty)
+    return total
