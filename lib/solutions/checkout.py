@@ -12,21 +12,21 @@ PRODUCT_TABLE = {
     'E': {'price': 40, 'offer': [ProductOffer(2, 'B')]},
     'F': {'price': 10, 'offer': [ProductOffer(3, 'F')]},
     'G': {'price': 20},
-    'H': {'price': 10},
+    'H': {'price': 10, 'offer': [PriceOffer(10, 80), PriceOffer(5, 45)]},
     'I': {'price': 35},
     'J': {'price': 60},
-    'K': {'price': 80},
+    'K': {'price': 80, 'offer': [PriceOffer(2, 150)]},
     'L': {'price': 90},
     'M': {'price': 15},
-    'N': {'price': 40},
+    'N': {'price': 40, 'offer': [ProductOffer(3, 'M')]},
     'O': {'price': 10},
-    'P': {'price': 50},
-    'Q': {'price': 30},
-    'R': {'price': 50},
+    'P': {'price': 50, 'offer': [PriceOffer(5, 250)]},
+    'Q': {'price': 30, 'offer': [PriceOffer(3, 80)]},
+    'R': {'price': 50, 'offer': [ProductOffer(3, 'Q')]},
     'S': {'price': 30},
     'T': {'price': 20},
-    'U': {'price': 40},
-    'V': {'price': 50},
+    'U': {'price': 40, 'offer': [ProductOffer(4, 'U')]},
+    'V': {'price': 50, 'offer': [PriceOffer(3, 130), PriceOffer(2, 90)]},
     'W': {'price': 20},
     'X': {'price': 90},
     'Y': {'price': 10},
@@ -46,7 +46,7 @@ def get_product_discounts(sku, quantity):
     product = get_product(sku)
     discounted_products = defaultdict(int)
     # The product offer should be sorted by quantity descending
-    if product['offer'] is not None:
+    if 'offer' in product:
         for offer in product['offer']:
             if isinstance(offer, ProductOffer):
                 offer_qty, quantity = quantity // offer.quantity, \

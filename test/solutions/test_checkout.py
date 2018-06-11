@@ -21,7 +21,6 @@ def test_checkout_success(skus, result):
 
 
 @pytest.mark.parametrize('skus', (
-        'Z',
         True,
         object(),
         'BBAY'
