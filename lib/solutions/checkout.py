@@ -99,11 +99,13 @@ def process_group_discounts_price(products):
         discounted_count = (group_qty // group.quantity) * group.quantity
         special_price += (group_qty // group.quantity) * group.price
 
-        while discounted_count > 0:
-            for sku in sorted(group_skus[group_id], key=lambda x: x[1]):
-                discounted = min(discounted_count, products[sku])
-                discounted_count -= discounted
-                products[sku] -= discounted
+        for sku in sorted(group_skus[group_id], key=lambda x: x[1],
+                          reverse=True):
+            discounted = min(discounted_count, products[sku])
+            discounted_count -= discounted
+            products[sku] -= discounted
+            if discounted_count <= 0:
+                break
 
     return special_price
 
