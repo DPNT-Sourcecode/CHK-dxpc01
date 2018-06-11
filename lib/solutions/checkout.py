@@ -31,8 +31,8 @@ PRODUCT_TABLE = {
     'X': {'price': 90},
     'Y': {'price': 10},
     'Z': {'price': 50},
-
 }
+
 
 
 def get_product(sku):
@@ -42,7 +42,7 @@ def get_product(sku):
     return product
 
 
-def get_product_discounts(sku, quantity):
+def get_other_product_discounts(sku, quantity):
     product = get_product(sku)
     discounted_products = defaultdict(int)
     # The product offer should be sorted by quantity descending
@@ -81,7 +81,7 @@ def checkout(skus):
 
     # Remove discounted products (the related quantity)
     for sku, qty in products.items():
-        disc_products = get_product_discounts(sku, qty)
+        disc_products = get_other_product_discounts(sku, qty)
         for disc_sku, qty in disc_products.items():
             products[disc_sku] -= qty
 
