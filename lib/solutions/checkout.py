@@ -28,6 +28,10 @@ PRODUCT_TABLE = {
         'price': 40,
         'offer': [ProductOffer(2, 'B')]
     },
+    'F': {
+        'price': 10,
+        'offer': [ProductOffer(3, 'F')]
+    },
 }
 
 

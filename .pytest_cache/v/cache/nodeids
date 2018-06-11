@@ -9,6 +9,7 @@
   "test/solutions/test_checkout.py::test_checkout_success[AAAAAAAAACD-415]", 
   "test/solutions/test_checkout.py::test_checkout_success[BBE-85]", 
   "test/solutions/test_checkout.py::test_checkout_success[BBEE-110]", 
+  "test/solutions/test_checkout.py::test_checkout_success[BFF-50]", 
   "test/solutions/test_checkout.py::test_checkout_fails[Z]", 
   "test/solutions/test_checkout.py::test_checkout_fails[True]", 
   "test/solutions/test_checkout.py::test_checkout_fails[skus2]", 
