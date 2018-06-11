@@ -7,15 +7,9 @@
   "test/solutions/test_checkout.py::test_checkout_fails[AAAAACD]": true, 
   "test/solutions/test_checkout.py::test_checkout_fails[AAA]": true, 
   "test/solutions/test_checkout.py::test_checkout_fails[BBAAA]": true, 
-  "test/solutions/test_checkout.py::test_checkout_fails[BBAY]": true, 
   "test/solutions/test_checkout.py::test_checkout_fails[D]": true, 
-  "test/solutions/test_checkout.py::test_checkout_fails[Z]": true, 
   "test/solutions/test_checkout.py::test_checkout_success[A-100]": true, 
-  "test/solutions/test_checkout.py::test_checkout_success[A-50]": true, 
-  "test/solutions/test_checkout.py::test_checkout_success[AA-100]": true, 
-  "test/solutions/test_checkout.py::test_checkout_success[AAA-130]": true, 
   "test/solutions/test_checkout.py::test_checkout_success[AAAAACD-264]": true, 
   "test/solutions/test_checkout.py::test_checkout_success[AAAAACD-265]": true, 
-  "test/solutions/test_checkout.py::test_checkout_success[BBAAA-175]": true, 
-  "test/solutions/test_checkout.py::test_checkout_success[D-15]": true
+  "test/solutions/test_checkout.py::test_checkout_success[BBE-40]": true
 }

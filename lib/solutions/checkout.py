@@ -31,19 +31,11 @@ PRODUCT_TABLE = {
 }
 
 
-def get_checkout_products(skus):
-    products = defaultdict(int)
-    for sku in skus:
-        if sku not in PRODUCT_TABLE:
-            return -1
-        products[sku] += 1
-    return products
-
-
 def get_product(sku):
     product = PRODUCT_TABLE[sku]
     if not product:
         raise ValueError('Product not found' + sku)
+    return product
 
 
 def get_product_discounts(sku, quantity):
@@ -76,7 +68,11 @@ def checkout(skus):
     if not isinstance(skus, basestring):
         return -1
 
-    products = get_checkout_products(skus)
+    products = defaultdict(int)
+    for sku in skus:
+        if sku not in PRODUCT_TABLE:
+            return -1
+        products[sku] += 1
 
     # Remove discounted products
     discounted_products = {}
