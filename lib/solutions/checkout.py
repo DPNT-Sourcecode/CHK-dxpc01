@@ -106,6 +106,21 @@ def process_group_discounts_price(products):
     return special_price
 
 
+def process_discounted_products(products):
+    for sku, qty in products.items():
+        disc_products = get_other_product_discounts(sku, qty)
+        for disc_sku, qty in disc_products.items():
+            products[disc_sku] -= qty
+
+
+def calculate_products(products):
+    total = 0
+    for sku, qty in products.items():
+        if qty > 0:
+            total += get_price(sku, qty)
+    return total
+
+
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
@@ -119,16 +134,6 @@ def checkout(skus):
         products[sku] += 1
 
     total = process_group_discounts_price(products)
-
-    # Remove discounted products (the related quantity)
-    for sku, qty in products.items():
-        disc_products = get_other_product_discounts(sku, qty)
-        for disc_sku, qty in disc_products.items():
-            products[disc_sku] -= qty
-
-    # Calculate basket
-    for sku, qty in products.items():
-        if qty > 0:
-            total += get_price(sku, qty)
-
+    process_discounted_products(products)
+    total += calculate_products(products)
     return total
