@@ -48,14 +48,14 @@ def get_product(sku):
 
 def get_product_discounts(sku, quantity):
     product = get_product(sku)
-    discount_products = defaultdict(int)
+    discounted_products = defaultdict(int)
     if product['offer'] is not None:
         for offer in product['offer']:
             if isinstance(offer, ProductOffer):
                 offer_qty, quantity = quantity // offer.quantity, \
                                       quantity % offer.quantity
-                discount_products[offer.product] = offer_qty
-    return discount_products
+                discounted_products[offer.product] = offer_qty
+    return discounted_products
 
 
 def get_price(sku, quantity):
@@ -77,6 +77,13 @@ def checkout(skus):
         return -1
 
     products = get_checkout_products(skus)
+
+    #
+    discounted_products = {}
+    for sku in products.keys():
+        disc_products = get_product_discounts(sku)
+        for disc_sku, qty in disc_products.items():
+            products[disc_products] -= qty
 
     # Calculate basket
     total = 0
