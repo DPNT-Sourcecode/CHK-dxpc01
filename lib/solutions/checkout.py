@@ -25,14 +25,14 @@ PRODUCT_TABLE = {
     'P': {'price': 50, 'offer': [PriceOffer(5, 200)]},
     'Q': {'price': 30, 'offer': [PriceOffer(3, 80)]},
     'R': {'price': 50, 'offer': [ProductOffer(3, 'Q')]},
-    'S': {'price': 30, 'offer': [SpecialOffer(1)]},
+    'S': {'price': 20, 'offer': [SpecialOffer(1)]},
     'T': {'price': 20, 'offer': [SpecialOffer(1)]},
     'U': {'price': 40, 'offer': [ProductOffer(4, 'U')]},
     'V': {'price': 50, 'offer': [PriceOffer(3, 130), PriceOffer(2, 90)]},
     'W': {'price': 20},
-    'X': {'price': 90, 'offer': [SpecialOffer(1)]},
-    'Y': {'price': 10, 'offer': [SpecialOffer(1)]},
-    'Z': {'price': 50, 'offer': [SpecialOffer(1)]},
+    'X': {'price': 17, 'offer': [SpecialOffer(1)]},
+    'Y': {'price': 20, 'offer': [SpecialOffer(1)]},
+    'Z': {'price': 21, 'offer': [SpecialOffer(1)]},
 }
 
 GROUP_DISCOUNTS = {
@@ -118,7 +118,6 @@ def checkout(skus):
             return -1
         products[sku] += 1
 
-    print(products)
     total = process_group_discounts_price(products)
 
     # Remove discounted products (the related quantity)
@@ -131,4 +130,5 @@ def checkout(skus):
     for sku, qty in products.items():
         if qty > 0:
             total += get_price(sku, qty)
+
     return total
