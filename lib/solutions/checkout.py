@@ -78,15 +78,16 @@ def checkout(skus):
 
     products = get_checkout_products(skus)
 
-    #
+    # Remove discounted products
     discounted_products = {}
-    for sku in products.keys():
-        disc_products = get_product_discounts(sku)
+    for sku, qty in products.items():
+        disc_products = get_product_discounts(sku, qty)
         for disc_sku, qty in disc_products.items():
             products[disc_products] -= qty
 
     # Calculate basket
     total = 0
     for sku, qty in products.items():
-        total += get_price(sku, qty)
+        if qty >= 0:
+            total += get_price(sku, qty)
     return total
