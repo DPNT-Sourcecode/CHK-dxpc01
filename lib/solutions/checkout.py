@@ -4,8 +4,6 @@ from collections import namedtuple
 PriceOffer = namedtuple('PriceOffer', ('quantity', 'price'))
 ProductOffer = namedtuple('ProductOffer', ('quantity', 'product'))
 
-
-
 PRODUCT_TABLE = {
     'A': {
         'price': 50,
@@ -34,6 +32,10 @@ PRODUCT_TABLE = {
         'price': 10,
         'offer': [ProductOffer(3, 'F')]
     },
+'G': {
+        'price': 10,
+        'offer': [ProductOffer(3, 'F')]
+    },
 }
 
 
@@ -47,6 +49,7 @@ def get_product(sku):
 def get_product_discounts(sku, quantity):
     product = get_product(sku)
     discounted_products = defaultdict(int)
+    # The product offer should be sorted by quantity descending
     if product['offer'] is not None:
         for offer in product['offer']:
             if isinstance(offer, ProductOffer):
