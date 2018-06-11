@@ -118,6 +118,7 @@ def checkout(skus):
             return -1
         products[sku] += 1
 
+    print(products)
     total = process_group_discounts_price(products)
 
     # Remove discounted products (the related quantity)
