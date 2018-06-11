@@ -36,7 +36,7 @@ def get_price(sku, quantity):
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
-    if not isinstance(skus, str):
+    if not isinstance(skus, basestring):
         return -1
 
     # Count the number of same products
