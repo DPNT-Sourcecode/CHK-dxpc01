@@ -4,5 +4,9 @@
   "test/solutions/test_checkout.py::test_checkout_faile[AA]": true, 
   "test/solutions/test_checkout.py::test_checkout_faile[BBAAA]": true, 
   "test/solutions/test_checkout.py::test_checkout_faile[D]": true, 
+  "test/solutions/test_checkout.py::test_checkout_fails[AAAAACD]": true, 
+  "test/solutions/test_checkout.py::test_checkout_fails[AAA]": true, 
+  "test/solutions/test_checkout.py::test_checkout_fails[BBAAA]": true, 
+  "test/solutions/test_checkout.py::test_checkout_fails[D]": true, 
   "test/solutions/test_checkout.py::test_checkout_success[AAAAACD-264]": true
 }

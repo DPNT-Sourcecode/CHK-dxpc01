@@ -14,11 +14,10 @@ def test_checkout_success(skus, result):
 
 
 @pytest.mark.parametrize('skus', (
-        ('Z',),
-        ('AAA',),
-        ('D',),
-        ('BBAAA',),
-        ('AAAAACD',)
+        'Z',
+        True,
+        object(),
+        'BBAY'
 ))
-def test_checkout_faile(skus):
-    assert checkout(skus) == -1
+def test_checkout_fails(skus):
+    assert checkout(skus) == -1, 'Must return -1 for skus {}'.format(skus)
