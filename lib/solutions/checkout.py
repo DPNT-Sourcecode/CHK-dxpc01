@@ -88,7 +88,9 @@ def process_group_discounts_price(products):
             group = GROUP_DISCOUNTS[offer.group_id]
             if sku in group.skus:
                 groups[offer.group_id] += qty
-                group_skus[offer.group_id].append(sku)
+                group_skus[offer.group_id].append(
+                    (sku, PRODUCT_TABLE[sku]['price'])
+                )
 
     # Apply the group discounts to all products
     special_price = 0
@@ -98,7 +100,7 @@ def process_group_discounts_price(products):
         special_price += (group_qty // group.quantity) * group.price
 
         while discounted_count > 0:
-            for sku in group_skus[group_id]:
+            for sku in sorted(group_skus[group_id], key=lambda x: x[1]):
                 discounted = min(discounted_count, products[sku])
                 discounted_count -= discounted
                 products[sku] -= discounted
