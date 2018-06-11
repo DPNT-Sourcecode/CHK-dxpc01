@@ -3,6 +3,8 @@ from collections import namedtuple
 
 PriceOffer = namedtuple('PriceOffer', ('quantity', 'price'))
 ProductOffer = namedtuple('ProductOffer', ('quantity', 'product'))
+SpecialOffer = namedtuple('SpecialOffer', ('group_id',))
+GroupDiscount = namedtuple('GroupDiscount', ('group', 'quantity', 'discount'))
 
 PRODUCT_TABLE = {
     'A': {'price': 50, 'offer': [PriceOffer(5, 200), PriceOffer(3, 130)]},
@@ -23,16 +25,19 @@ PRODUCT_TABLE = {
     'P': {'price': 50, 'offer': [PriceOffer(5, 200)]},
     'Q': {'price': 30, 'offer': [PriceOffer(3, 80)]},
     'R': {'price': 50, 'offer': [ProductOffer(3, 'Q')]},
-    'S': {'price': 30},
-    'T': {'price': 20},
+    'S': {'price': 30, 'offer': [SpecialOffer(1)]},
+    'T': {'price': 20, 'offer': [SpecialOffer(1)]},
     'U': {'price': 40, 'offer': [ProductOffer(4, 'U')]},
     'V': {'price': 50, 'offer': [PriceOffer(3, 130), PriceOffer(2, 90)]},
     'W': {'price': 20},
-    'X': {'price': 90},
-    'Y': {'price': 10},
-    'Z': {'price': 50},
+    'X': {'price': 90, 'offer': [SpecialOffer(1)]},
+    'Y': {'price': 10, 'offer': [SpecialOffer(1)]},
+    'Z': {'price': 50, 'offer': [SpecialOffer(1)]},
 }
 
+GROUP_DISCOUNTS = {
+    1: GroupDiscount({'S', 'T', 'X', 'Y', 'Z'}, 3, 45)
+}
 
 
 def get_product(sku):
@@ -88,6 +93,6 @@ def checkout(skus):
     # Calculate basket
     total = 0
     for sku, qty in products.items():
-        if qty >= 0:
+        if qty > 0:
             total += get_price(sku, qty)
     return total
