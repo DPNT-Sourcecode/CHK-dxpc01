@@ -1,4 +1,4 @@
-import unittest
+import pytest
 
 from lib.solutions.sum import sum
 
