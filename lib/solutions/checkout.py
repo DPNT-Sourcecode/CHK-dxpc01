@@ -17,7 +17,7 @@ PRODUCT_TABLE = {
     'H': {'price': 10, 'offer': [PriceOffer(10, 80), PriceOffer(5, 45)]},
     'I': {'price': 35},
     'J': {'price': 60},
-    'K': {'price': 70, 'offer': [PriceOffer(2, 150)]},
+    'K': {'price': 70, 'offer': [PriceOffer(2, 120)]},
     'L': {'price': 90},
     'M': {'price': 15},
     'N': {'price': 40, 'offer': [ProductOffer(3, 'M')]},
