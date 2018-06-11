@@ -5,37 +5,33 @@ PriceOffer = namedtuple('PriceOffer', ('quantity', 'price'))
 ProductOffer = namedtuple('ProductOffer', ('quantity', 'product'))
 
 PRODUCT_TABLE = {
-    'A': {
-        'price': 50,
-        'offer': [
-            PriceOffer(5, 200),
-            PriceOffer(3, 130)
-        ]
-    },
-    'B': {
-        'price': 30,
-        'offer': [PriceOffer(2, 45)]
-    },
-    'C': {
-        'price': 20,
-        'offer': None
-    },
-    'D': {
-        'price': 15,
-        'offer': None
-    },
-    'E': {
-        'price': 40,
-        'offer': [ProductOffer(2, 'B')]
-    },
-    'F': {
-        'price': 10,
-        'offer': [ProductOffer(3, 'F')]
-    },
-'G': {
-        'price': 10,
-        'offer': [ProductOffer(3, 'F')]
-    },
+    'A': {'price': 50, 'offer': [PriceOffer(5, 200), PriceOffer(3, 130)]},
+    'B': {'price': 30, 'offer': [PriceOffer(2, 45)]},
+    'C': {'price': 20},
+    'D': {'price': 15},
+    'E': {'price': 40, 'offer': [ProductOffer(2, 'B')]},
+    'F': {'price': 10, 'offer': [ProductOffer(3, 'F')]},
+    'G': {'price': 20},
+    'H': {'price': 10},
+    'I': {'price': 35},
+    'J': {'price': 60},
+    'K': {'price': 80},
+    'L': {'price': 90},
+    'M': {'price': 15},
+    'N': {'price': 40},
+    'O': {'price': 10},
+    'P': {'price': 50},
+    'Q': {'price': 30},
+    'R': {'price': 50},
+    'S': {'price': 30},
+    'T': {'price': 20},
+    'U': {'price': 40},
+    'V': {'price': 50},
+    'W': {'price': 20},
+    'X': {'price': 90},
+    'Y': {'price': 10},
+    'Z': {'price': 50},
+
 }
 
 
@@ -62,7 +58,7 @@ def get_product_discounts(sku, quantity):
 def get_price(sku, quantity):
     product = get_product(sku)
     offer_price = 0
-    if product['offer'] is not None:
+    if 'offer' in product:
         for offer in product['offer']:
             if isinstance(offer, PriceOffer):
                 offer_qty, quantity = quantity // offer.quantity, \
