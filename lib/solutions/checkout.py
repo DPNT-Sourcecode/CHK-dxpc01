@@ -4,7 +4,7 @@ from collections import namedtuple
 PriceOffer = namedtuple('PriceOffer', ('quantity', 'price'))
 ProductOffer = namedtuple('ProductOffer', ('quantity', 'product'))
 SpecialOffer = namedtuple('SpecialOffer', ('group_id',))
-GroupDiscount = namedtuple('GroupDiscount', ('group', 'quantity', 'discount'))
+GroupDiscount = namedtuple('GroupDiscount', ('group', 'quantity', 'price'))
 
 PRODUCT_TABLE = {
     'A': {'price': 50, 'offer': [PriceOffer(5, 200), PriceOffer(3, 130)]},
@@ -83,6 +83,27 @@ def checkout(skus):
         if sku not in PRODUCT_TABLE:
             return -1
         products[sku] += 1
+
+    # Process group discounts
+    special_offer_price = 0
+    discount_count = 0
+    for sku, qty in products.items():
+        product = get_product(sku)
+        if 'offer' in product:
+
+            for offer in product['offer']:
+                if not isinstance(offer, SpecialOffer):
+                    continue
+
+                group_discount = GROUP_DISCOUNTS[offer.group_id]
+                if sku in group_discount.group:
+                    discount_count += qty
+                    discounted_qty = discount_count // group_discount.quantity
+
+                    if discounted_qty > 0:
+                        special_offer_price += \
+                            discounted_qty * group_discount.price
+                        products[sku] -=
 
     # Remove discounted products (the related quantity)
     for sku, qty in products.items():
