@@ -1,0 +1,10 @@
+#!d:\workspace\_test\python\challenges\iwoca\tdl-runner-python\env\scripts\python.exe
+
+import os
+import stomp
+import sys
+
+stomp_path = os.path.dirname(stomp.__file__)
+executable = sys.executable or "python"
+
+os.system('%s %s %s' % (executable, stomp_path, ' '.join(sys.argv)))
