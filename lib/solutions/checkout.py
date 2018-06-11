@@ -1,21 +1,20 @@
 from collections import defaultdict
 from collections import namedtuple
 
-PriceOffer = namedtuple('Offer', ('quantity', 'price'))
-PRICE_TYPE = 'price'
-PRODUCT_TYPE = 'prod'
+PriceOffer = namedtuple('PriceOffer', ('quantity', 'price'))
+ProductOffer = namedtuple('ProductOffer', ('quantity', 'product'))
 
 PRODUCT_TABLE = {
     'A': {
         'price': 50,
         'offer': [
-            Offer(PRICE_TYPE, 5, 200),
-            Offer(PRICE_TYPE, 3, 130)
+            PriceOffer(5, 200),
+            PriceOffer(3, 130)
         ]
     },
     'B': {
         'price': 30,
-        'offer': [Offer(PRICE_TYPE, 2, 45)]
+        'offer': [PriceOffer(2, 45)]
     },
     'C': {
         'price': 20,
@@ -27,37 +26,48 @@ PRODUCT_TABLE = {
     },
     'E': {
         'price': 40,
-        'offer': [Offer(PRODUCT_TYPE, 2, 'B')]
+        'offer': [ProductOffer(2, 'B')]
     },
 }
 
 
-def get_price(sku, quantity):
-    product = PRODUCT_TABLE[sku]
-    if not product:
-        raise ValueError('Product not found' + sku)
-
-    discount_product = defaultdict(int)
-    offer_price = 0
-    if product['offer'] is not None:
-        for offer in product['offer']:
-            if offer.type == PRICE_TYPE:
-                offer_qty = offer[0]
-                offer_qty, quantity = quantity // offer_qty, quantity % offer_qty
-                offer_price += offer_qty * offer[1]
-            else:
-                discount_product[offer]
-    return offer_price + quantity * product['price']
-
-
 def get_checkout_products(skus):
-    # Count the number of same products
     products = defaultdict(int)
     for sku in skus:
         if sku not in PRODUCT_TABLE:
             return -1
         products[sku] += 1
     return products
+
+
+def get_product(sku):
+    product = PRODUCT_TABLE[sku]
+    if not product:
+        raise ValueError('Product not found' + sku)
+
+
+def get_product_discounts(sku, quantity):
+    product = get_product(sku)
+    discount_products = defaultdict(int)
+    if product['offer'] is not None:
+        for offer in product['offer']:
+            if isinstance(offer, ProductOffer):
+                offer_qty, quantity = quantity // offer.quantity, \
+                                      quantity % offer.quantity
+                discount_products[offer.product] = offer_qty
+    return discount_products
+
+
+def get_price(sku, quantity):
+    product = get_product(sku)
+    offer_price = 0
+    if product['offer'] is not None:
+        for offer in product['offer']:
+            if isinstance(offer, PriceOffer):
+                offer_qty, quantity = quantity // offer.quantity, \
+                                      quantity % offer.quantity
+                offer_price += offer_qty * offer[1]
+    return offer_price + quantity * product['price']
 
 
 # noinspection PyUnusedLocal
