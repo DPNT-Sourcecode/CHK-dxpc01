@@ -1,13 +1,21 @@
 from collections import defaultdict
+from collections import namedtuple
+
+Offer = namedtuple('Offer', ('type', 'quantity', 'price'))
+PRICE_TYPE = 'price'
+PRODUCT_TYPE = 'prod'
 
 PRODUCT_TABLE = {
     'A': {
         'price': 50,
-        'offer': [(5, 200), (3, 130)]
+        'offer': [
+            Offer(PRICE_TYPE, 5, 200),
+            Offer(PRICE_TYPE, 3, 130)
+        ]
     },
     'B': {
         'price': 30,
-        'offer': [(2, 45)]
+        'offer': [Offer(PRICE_TYPE, 2, 45)]
     },
     'C': {
         'price': 20,
@@ -19,7 +27,7 @@ PRODUCT_TABLE = {
     },
     'E': {
         'price': 40,
-        'offer': [(2, 'B')]
+        'offer': [Offer(PRODUCT_TYPE, 2, 'B')]
     },
 }
 
@@ -29,19 +37,16 @@ def get_price(sku, quantity):
     if not product:
         raise ValueError('Product not found' + sku)
 
+    discount_product = {}
     offer_price = 0
     if product['offer'] is not None:
         for offer in product['offer']:
+
+
             offer_qty = offer[0]
             offer_qty, quantity = quantity // offer_qty, quantity % offer_qty
-            offer_price += offer_qty * offer_price[1]
+            offer_price += offer_qty * offer[1]
 
-    if product['offer'] is not None:
-        offer_qty = product['offer'][0]
-        offer_qty, quantity = quantity // offer_qty, quantity % offer_qty
-        offer_price = offer_qty * product['offer'][1]
-    else:
-        offer_price = 0
     return offer_price + quantity * product['price']
 
 
